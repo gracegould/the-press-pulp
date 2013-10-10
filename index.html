@@ -18,25 +18,26 @@
   <script src="js/vendor/parsley.min.js"></script>
   <script src="js/vendor/parsley.min.js"></script>
   <script src="js/vendor/matchMedia.js"></script>
-
-  <!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
-    typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);
-  b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
-  mixpanel.init("55861765fa6ac6c26bd23174842c67f0");</script><!-- end Mixpanel -->
 </head>
 <body>
-  <script type="text/javascript">
-    mixpanel.track("view:home");
-  </script>
-
   <div class="container">
     <div class="row">
       <div class="column large-8 large-centered">
 
         <div class="introduce">
           <div class="header">
-            <h1>Delight</h1>
-            <h2>One great read outweighs the influence of a thousand mediocre blog posts. We’ll send you <i>one</i> human-curated read each day; chosen for you.</h2>
+            <h1 class="text-center">The Press Pulp</h1>
+            <div class="row">
+              <div class="column large-4">
+                <h2>Receive regular updates with links to all of your digital coverage.</h2>
+              </div>
+              <div class="column large-4">
+                <h2>Have your coverage graded on sentiment and brand values.</h2>
+              </div>
+              <div class="column large-4">
+                <h2>Receive hard data on the reach and demographic of your coverage.</h2>
+              </div>
+            </div>
           </div>
           <div class="details">
             <form for="/submit" data-validate="parsley">
@@ -44,59 +45,19 @@
                 <div class="column large-2">
                   <label class="inline">Email</label>
                 </div>
-                <div class="column large-8">
-                  <input id="email" type="text" value="" placeholder="We'll only email once, unless you'd like more" data-required="true"/>
+                <div class="column large-7">
+                  <input id="email" type="text" value="" placeholder="Enter your email to find out more..." data-required="true"/>
                 </div>
-                <div class="column large-2"></div>
-              </div>
-
-              <div class="row">
-                <div class="column large-2">
-                  <label class="inline">Twitter</label>
-                </div>
-                <div class="column large-6">
-                  <input id="twitter" type="text" value="" placeholder="Your twitter handle" />
-                </div>
-                <div class="column large-4">
-                  <label class="inline more"><a id="show-more-detail"  tabindex = "-1" href="#">Tell us more? <span style="color:#888">(optional)</span></a></label>
-                </div>
-                <div class="column large-2"></div>
-              </div>
-
-              <script type="text/javascript">
-                $(function(){
-                  $("#show-more-detail").click(function(e){
-                    $("#show-more-detail").parent().hide();
-                    $("#more-detail").slideDown(200, function(){
-                    });
-                    e.preventDefault();
-                  });
-                });
-              </script>
-              <div id="more-detail" class="row" style="display:none;">
-                <div class="column large-2">
-                  <label class="inline">Thoughts?</label>
-                </div>
-                <div class="column large-8">
-                  <input id="info" type="text" value="" placeholder="Name someone you admire" />
-                </div>
-                <div class="column large-2"></div>
-              </div>
-
-
-              <div class="row">
-                <div class="column large-8">
-                </div>
-                <div class="column large-4">
-                  <button class="button expand">Delight me</button>
+                <div class="column large-3">
+                  <button class="button expand">Find out more</button>
                 </div>
               </div>
             </form>
 
-            <script src="//www.parsecdn.com/js/parse-1.1.15.min.js"></script>
+            <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
             <script type="text/javascript">
-              Parse.initialize("qkv9amXBFcLY4Et3pJ8tCv7XLBYga1dnMENK2ZR8", "60gKu9tz82XyYYCDQxkYCOYBK8jl3viK6W2hcPrW");
-              var User = Parse.Object.extend("DelightedUser");
+              Parse.initialize("clilZVYHeuyFY8CtFExZG3lMPCZpM4dGgLHBEM6W", "rL0PyxC4xFmEJ72hWz3lVGynPKZSptoL1UnjLAkx");
+              var User = Parse.Object.extend("Lead");
 
               $(function(){
                 $("form").submit(function(e){
@@ -104,24 +65,20 @@
                     var user = new User();
 
                     user.set("email", $("#email").val());
-                    user.set("twitter", $("#twitter").val());
-                    user.set("info", $("#info").val());
 
+                    console.log(user);
                     user.save(null, {
                       success: function(user) {
-                        mixpanel.track("event:signup");
                         $(".details").slideUp(300, function(){
-                          $(".details").html("<h2><b>Thanks for signing up!</b> We'll be in contact with your first read shortly!</h2>");
+                          $(".details").html("<h2><b>Thanks for registering your interest!</b> We'll be in touch shortly!</h2>");
                           $(".details").slideDown(300);
                         });
                       },
                       error: function(user, error) {
-                        mixpanel.track("error:signup");
                         alert('Failed to create new object, with error code: ' + error.description);
                       }
                     });
                   } else {
-                    mixpanel.track("error:validation");
                   }
                   e.preventDefault();
                 });
@@ -134,9 +91,8 @@
 
         <div class="about">
           <div class="header">
-            <h1>Delight</h1>
-            <h2>The internet bombards us with noise and distraction. We’re constantly checking Hacker News, and Twitter; it's a terrible habit.</h2>
-            <h2>We’re attempting to distil signal from the noise - and you can help. Every day we’ll surprise you with just one delightful thing to read that's been hand-picked by a human; let us know if you enjoyed it, and we’ll keep sending.</h2>
+            <h1 class="text-center">The Press Pulp</h1>
+            <h2>More about The Press Pulp</h2>
           </div>
           <a id="show-home" class="small-button" href="#">About</a>
         </div>
@@ -167,7 +123,7 @@
   <script>
     var onMediaMatch = function() {
       if (window.matchMedia("only screen and (min-width: 48em)").matches) {
-        $("#email").attr("placeholder", "We'll only email once, unless you'd like more");
+        $("#email").attr("placeholder", "Enter your email to find out more...");
         $("#twitter").attr("placeholder", "Your Twitter handle");
       } else {
         $("#email").attr("placeholder", "Email");
